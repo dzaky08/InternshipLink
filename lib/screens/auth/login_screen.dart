@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/home_screen.dart';
+import 'package:internshiplink/screens/home_screen.dart';
 import 'package:internshiplink/screens/auth/register_screen.dart';
 
 import '../../component/ev_typography.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _isHidePassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,7 @@ class LoginScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(24, 25, 24, 20),
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.60,
+                height: MediaQuery.of(context).size.height * 0.50,
                 decoration: const BoxDecoration(
                     color: EVColor.neutral10,
                     borderRadius: BorderRadius.only(
@@ -48,46 +61,42 @@ class LoginScreen extends StatelessWidget {
                         style: EVTypography.bold.copyWith(fontSize: 20),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(10, 30, 10, 20),
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: EVColor.neutral20,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
+                    TextFormField(
+                      autofocus: false,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          border: Border.all(color: EVColor.neutral80)),
-                      child: TextFormField(
-                        autofocus: false,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                        ),
-                      ),
+                          hintText: 'email'),
                     ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: EVColor.neutral20,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      obscureText: _isHidePassword,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            _togglePasswordVisibility();
+                          },
+                          icon: Icon(
+                            _isHidePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
-                          border: Border.all(color: EVColor.neutral80)),
-                      child: TextFormField(
-                        autofocus: false,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          suffixIcon: IconButton(
-                              onPressed: menampilkan,
-                              icon: Icon(Icons.visibility_off_outlined)),
+                        ),
+                        suffixIconConstraints: const BoxConstraints(
+                          minHeight: 32,
+                          minWidth: 32,
                         ),
                       ),
                     ),
@@ -158,7 +167,7 @@ class LoginScreen extends StatelessWidget {
                             },
                             child: const Text('Sign Up'))
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -169,5 +178,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-void menampilkan() {}

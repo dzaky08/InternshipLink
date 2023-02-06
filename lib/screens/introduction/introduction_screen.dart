@@ -59,6 +59,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                           child: Text(
                             'Kalian dapat ngetracking para alumni yang telah melakukan PKL di PT. Jerbee Indonesia',
                             style: EVTypography.regular.copyWith(fontSize: 16),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                         Container(
@@ -91,7 +92,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                     const EdgeInsets.fromLTRB(0, 25, 10, 10),
                                 child: TextButton(
                                     onPressed: () {
-                                      Navigator.push(
+                                      Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) =>
@@ -173,6 +174,7 @@ class _IntroductionScreen2State extends State<IntroductionScreen2> {
                           child: Text(
                             'Kalian dapat mendiskusikan masalah kalian dengan mempostingnya dan kalian juga dapat membantu memecahkan masalah pengguna lain dengan memberikan komentar pada postingan mereka',
                             style: EVTypography.regular.copyWith(fontSize: 16),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                         Container(

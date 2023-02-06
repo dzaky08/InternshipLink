@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/home_screen.dart';
+import 'package:internshiplink/screens/home_screen.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
 
 import '../../component/ev_typography.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  bool _isHidePassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +114,17 @@ class RegisterPage extends StatelessWidget {
                           border: Border.all(color: EVColor.neutral80)),
                       child: TextFormField(
                         autofocus: false,
-                        obscureText: true,
-                        decoration: const InputDecoration(
+                        obscureText: _isHidePassword,
+                        decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Password',
                           suffixIcon: IconButton(
-                              onPressed: menampilkan,
-                              icon: Icon(Icons.visibility_off_outlined)),
+                              onPressed: () {
+                                _togglePasswordVisibility();
+                              },
+                              icon: Icon(_isHidePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility)),
                         ),
                       ),
                     ),
